@@ -32,27 +32,30 @@ public class Jogo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
         grid = (GridLayout) findViewById(R.id.idGrid);
-        grid.setColumnCount(t);
-        grid.setRowCount(t);
-        table = new ImageView[t][t];
+
         botBot = (ImageButton) findViewById(R.id.idButtonBot);
         botTop = (ImageButton) findViewById(R.id.idButtonTop);
         botLe = (ImageButton) findViewById(R.id.idButtonLe);
         botRi = (ImageButton) findViewById(R.id.idButtonRi);
 
-        Bundle args = getIntent().getExtras();
-        int n = args.getInt("tam");
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
+        Bundle recuperaDados = getIntent().getExtras();
+        int n = recuperaDados.getInt("tamanho");
+        grid.setColumnCount(n);
+        grid.setRowCount(n);
+        table = new ImageView[n][n];
+            for(int i = 0; i < n; i++){
+                for(int j = 0; j < n; j++){
 
-                LayoutInflater inflar = LayoutInflater.from(this);
-                ImageView imageSquares = (ImageView) inflar.inflate(R.layout.square, grid, false);
-                table[i][j] = imageSquares;
-                grid.addView(imageSquares);
+                    LayoutInflater inflar = LayoutInflater.from(this);
+                    ImageView imageSquares = (ImageView) inflar.inflate(R.layout.square, grid, false);
+                    table[i][j] = imageSquares;
+                    grid.addView(imageSquares);
+
+                }
 
             }
 
-        }
+
 
     }
 

@@ -9,7 +9,7 @@ import android.widget.RadioGroup;
 public class Config extends AppCompatActivity {
 
     RadioGroup grupoRadio;
-
+    Config c = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,20 +20,24 @@ public class Config extends AppCompatActivity {
     }
 
     public void clik(View v){
+
+        Intent i = new Intent(c, MainActivity.class);
+        Bundle dados = new Bundle();
+
         if (R.id.idCinquenta == grupoRadio.getCheckedRadioButtonId()){
-            Intent i = new Intent(getApplicationContext(), Jogo.class);
-            Bundle dados = new Bundle();
+
             dados.putInt("tam", 30);
             i.putExtras(dados);
             startActivity(i);
-            finish();
+
         }else if (R.id.idVinteCinco == grupoRadio.getCheckedRadioButtonId()){
-            Intent i = new Intent(getApplicationContext(), Jogo.class);
-            Bundle dados = new Bundle();
+
             dados.putInt("tam", 25);
             i.putExtras(dados);
             startActivity(i);
-            finish();
+
         }
+
+
     }
 }
