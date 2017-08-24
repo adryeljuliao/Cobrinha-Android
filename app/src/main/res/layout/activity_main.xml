@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Start"
+            android:onClick="iniciar"
             />
         <Button
             android:id="@+id/idContinua"
@@ -67,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Settings"
+            android:onClick="config"
             />
         <Button
             android:id="@+id/idExit"

@@ -4,14 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.juliao.adryel.myapplication.Jogo">
+    tools:context="com.juliao.adryel.myapplication.Jogo"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp"
+    android:background="#000000">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="kkkkkkkkkkkk"/>
+
+        android:gravity="center"
+        android:background="#fff6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+       <GridLayout
+
+           android:background="#fff6"
+           android:id="@+id/idGrid"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           ></GridLayout>
     </LinearLayout>
+
+   <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/buttom_top"
+       android:padding="0dp"
+       android:id="@+id/idButtonTop"
+       android:onClick="click2"
+       tools:layout_constraintBottom_creator="1"
+       app:layout_constraintBottom_toTopOf="@+id/idButtonBot"
+       tools:layout_constraintLeft_creator="1"
+       android:layout_marginBottom="45dp"
+       app:layout_constraintLeft_toRightOf="@+id/idButtonLe" />
+    <ImageButton
+        android:onClick="click2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/buttom_bottom"
+        android:padding="0dp"
+        android:id="@+id/idButtonBot"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/idButtonTop"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="29dp"
+        app:layout_constraintLeft_toLeftOf="@+id/idButtonTop" />
+
+    <ImageButton
+        android:onClick="click1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/buttom_ri"
+        android:padding="0dp"
+        android:id="@+id/idButtonRi"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toBottomOf="@+id/idButtonTop"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toRightOf="@+id/idButtonBot" />
+    <ImageButton
+        android:onClick="click1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/buttom_le"
+        android:padding="0dp"
+        android:layout_marginStart="36dp"
+        android:id="@+id/idButtonLe"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toBottomOf="@+id/idButtonTop"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
