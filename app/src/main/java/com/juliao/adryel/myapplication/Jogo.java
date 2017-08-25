@@ -26,7 +26,7 @@ public class Jogo extends AppCompatActivity {
     int y;
     int[] fruit = new int[2];
     int score;
-    boolean running;
+    boolean running = true;
     ImageButton botTop;
     ImageButton botBot;
     ImageButton botLe;
@@ -93,9 +93,13 @@ public class Jogo extends AppCompatActivity {
     }
 
     public void squareRed(ImageView v){
+
         v.setImageResource(R.drawable.red_square);
     }
 
+    public void squareBlack(ImageView v){
+        v.setImageResource(R.drawable.square_black);
+    }
     public void createSnake(){
         squareRed(table[n/2][n/2]);
         orientation[0] = 0;
@@ -106,12 +110,14 @@ public class Jogo extends AppCompatActivity {
         snake.add(position);
         move(orientation);
     }
-    public void head(int[] orient){
+    public void head(){
         position = snake.get(0);
-        position[0] += orient[0];
-        position[1] += orient[1];
-        squareRed(table[position[0]][position[1]]);
-        snake.set(0, position);
+        position[0] += orientation[0];
+        position[1] += orientation[1];
+
+
+        snake.get(0)[0] = position[0];
+        snake.get(0)[1] = position[1];
     }
 
     public void move(final int[] orient){
@@ -122,17 +128,32 @@ public class Jogo extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                handler.postDelayed(new Runnable() {
+                while(running){
+                    try {
+                        Thread.sleep(250);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                handler.post(new Runnable() {
                     @Override
                     public void run() {
                         for (int i = 0; i < snake.size(); i++) {
                             int [] position = snake.get(i);
+
+                            squareBlack(table[position[0]][position[1]]);
+
+
+                        }
+                        head();
+                        for (int i = 0; i < snake.size(); i++){
+                            int [] position = snake.get(i);
                             squareRed(table[position[0]][position[1]]);
                         }
-                       // head(orient);
-                        move(orient);
+
                     }
-                }, 200);
+                });
+                }
             }
         }).start();
 
@@ -142,6 +163,9 @@ public class Jogo extends AppCompatActivity {
 
     public void clickLeft(View v){
         botRi.setEnabled(false);
+        botBot.setEnabled(true);
+        botTop.setEnabled(true);
+
         orientation[0] = 0;
         orientation[1] = -1;
         /*if(botBot.isPressed()){
@@ -151,25 +175,32 @@ public class Jogo extends AppCompatActivity {
 
     public void clickRigh(View v){
         botLe.setEnabled(false);
+        botTop.setEnabled(true);
+        botBot.setEnabled(true);
         orientation[0] = 0;
         orientation[1] = 1;
     }
 
     public void clickTop(View v){
         botBot.setEnabled(false);
+        botRi.setEnabled(true);
+        botLe.setEnabled(true);
         orientation[0] = -1;
         orientation[1] = 0;
     }
     public void clickBottom(View v){
         botTop.setEnabled(false);
+        botLe.setEnabled(true);
+        botRi.setEnabled(true);
         orientation[0] = 1;
         orientation[1] = 0;
     }
-    public void click1(View v){
-        botLe.setEnabled(false);
-        botRi.setEnabled(false);
-        botBot.setEnabled(true);
-        botTop.setEnabled(true);
+    public void stop(View v){
+       running = false;
+    }
+    public void continued(View v){
+        running = true;
+        move(orientation);
     }
     public void click2(View v){
         botLe.setEnabled(true);
