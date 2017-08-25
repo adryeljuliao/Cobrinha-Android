@@ -11,54 +11,53 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class Jogo extends AppCompatActivity {
-    MediaPlayer mp;
-    int n;
-    GridLayout grid;
-    ImageView[][] table;
-    ArrayList<int []> snake = new ArrayList<>();
-    int[] orientation = new int[2];
-    int[] position = new int[2];
-    int x;
-    int y;
-    int[] fruit = new int[2];
-    int score;
-    boolean running = true;
-    ImageButton botTop;
-    ImageButton botBot;
-    ImageButton botLe;
-    ImageButton botRi;
-    ImageView headSnake;
+    MediaPlayer mp;//musica do app
+    int tam;//tamanho do tabuleiro
+    int dificult = 200;//nivel de dificuldade
+    GridLayout grid;//tabuleiro grid para inflar
+    ImageView[][] table;//tabuleiro auxiliar
+    ArrayList<int []> snake = new ArrayList<>();//cobra, arrayList de vetor
+    int[] orientation = new int[2];//diretção da cobra
+    int[] position = new int[2];//posição
+//    int x;
+//    int y;
+//    int[] fruit = new int[2];
+//    int score;
+    boolean running = true;//variavel axuliar para pausar ou despausar o jogo
+    ImageButton botTop;//botao para cima
+    ImageButton botBot;//botao para baixo
+    ImageButton botLe;//botao para esquerda
+    ImageButton botRi;//botao para direita
+//    ImageView headSnake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
 
-        grid = (GridLayout) findViewById(R.id.idGrid);
-
+        grid = (GridLayout) findViewById(R.id.idGrid);//pegando o grid pelo id
+        //pegando os botoes
         botBot = (ImageButton) findViewById(R.id.idButtonBot);
         botTop = (ImageButton) findViewById(R.id.idButtonTop);
         botLe = (ImageButton) findViewById(R.id.idButtonLe);
         botRi = (ImageButton) findViewById(R.id.idButtonRi);
 
-        Bundle recuperaDados = getIntent().getExtras();
-        if(recuperaDados == null){
+        Bundle recuperaDados = getIntent().getExtras();//recuperando os dados do bandle da activity inicial
+        if(recuperaDados == null){//verifica se o bundle é vazio, se for inicia com um valor padrão e dificuldade padrao
+
             Log.i("ENTRA", "entrou no if");
-            n = 30;
-            grid.setColumnCount(n);
-            grid.setRowCount(n);
-            table = new ImageView[n][n];
-            for(int i = 0; i < n; i++){
-                for(int j = 0; j < n; j++){
+            tam = 30;
+            grid.setColumnCount(tam);
+            grid.setRowCount(tam);
+            table = new ImageView[tam][tam];
+            //for para inflar um layout, ou seja, o gridLayout
+            for(int i = 0; i < tam; i++){
+                for(int j = 0; j < tam; j++){
 
-
-
-                    LayoutInflater inflar = LayoutInflater.from(this);
-                    ImageView imageSquares = (ImageView) inflar.inflate(R.layout.square, grid, false);
+                    LayoutInflater inflar = LayoutInflater.from(this);//obj que serve para inflar, pegando como parametro o contexto
+                    ImageView imageSquares = (ImageView) inflar.inflate(R.layout.square, grid, false);//infla o layout
                     table[i][j] = imageSquares;
                     grid.addView(imageSquares);
 
@@ -101,12 +100,12 @@ public class Jogo extends AppCompatActivity {
         v.setImageResource(R.drawable.square_black);
     }
     public void createSnake(){
-        squareRed(table[n/2][n/2]);
+        squareRed(table[tam /2][tam /2]);
         orientation[0] = 0;
         orientation[1] = 1;
         int position[] = new int[2];
-        position[0] = n/2;
-        position[1] = n/2;
+        position[0] = tam /2;
+        position[1] = tam /2;
         snake.add(position);
         move(orientation);
     }
@@ -130,7 +129,7 @@ public class Jogo extends AppCompatActivity {
             public void run() {
                 while(running){
                     try {
-                        Thread.sleep(250);
+                        Thread.sleep(dificult);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -200,7 +199,7 @@ public class Jogo extends AppCompatActivity {
     }
     public void continued(View v){
         running = true;
-        move(orientation); 
+        move(orientation);
     }
     public void click2(View v){
         botLe.setEnabled(true);
