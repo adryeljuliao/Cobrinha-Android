@@ -200,7 +200,7 @@ public class Jogo extends AppCompatActivity {
     }
     public void continued(View v){
         running = true;
-        move(orientation);
+        move(orientation); 
     }
     public void click2(View v){
         botLe.setEnabled(true);
