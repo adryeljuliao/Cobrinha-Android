@@ -22,16 +22,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void iniciar(View v){
-
-        Bundle recuperaDados = getIntent().getExtras();
-        int n = recuperaDados.getInt("tam");
         Intent i = new Intent(this, Jogo.class);
-
+        Bundle recuperaDados = getIntent().getExtras();
+        if(recuperaDados == null){
+            startActivity(i);
+        }else{
+            int n = recuperaDados.getInt("tam");
             i.putExtra("tamanho", n);
+            startActivity(i);
+        }
 
 
 
-        startActivity(i);
+
+
     }
     public void config(View v){
         Intent intent = new Intent(getApplication(), Config.class);
