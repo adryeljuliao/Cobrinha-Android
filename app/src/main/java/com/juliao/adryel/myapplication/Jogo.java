@@ -253,7 +253,6 @@ public class Jogo extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mp.stop();
 
     }
 
@@ -262,6 +261,8 @@ public class Jogo extends AppCompatActivity {
         super.onStop();
         SharedPreferences settings = getSharedPreferences(PREF_SNAKE, MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
+        mp.stop();
+
         //editor.putInt("", table[position[0]][position[1]]);
     }
 }
