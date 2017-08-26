@@ -23,8 +23,8 @@ public class Jogo extends AppCompatActivity {
     ArrayList<int []> snake = new ArrayList<>();//cobra, arrayList de vetor
     int[] orientation = new int[2];//diretção da cobra
     int[] position = new int[2];//posição
-//    int x;
-//    int y;
+    int x;
+    int y;
 //    int[] fruit = new int[2];
 //    int score;
     boolean running = true;//variavel axuliar para pausar ou despausar o jogo
@@ -60,8 +60,9 @@ public class Jogo extends AppCompatActivity {
 
 
         }else{
+
             Log.i("ENTRA", "entrou no ELSE");
-            int n = recuperaDados.getInt("tamanho");
+            n = recuperaDados.getInt("tamanho");
             dificult = recuperaDados.getInt("dificuldade");
             grid.setColumnCount(n);
             grid.setRowCount(n);
@@ -69,6 +70,7 @@ public class Jogo extends AppCompatActivity {
             inflatGrid(n);
 
         }
+        //coloca a musica para tocar
         mp = MediaPlayer.create(this, R.raw.spi);
         mp.setLooping(true);
         mp.start();
@@ -93,69 +95,79 @@ public class Jogo extends AppCompatActivity {
         }
     }
 
-    public void checkPosition(int[] pos){
 
-    }
-
+//metodo para setar um quadradinho vermelho
     public void squareRed(ImageView v){
 
         v.setImageResource(R.drawable.red_square);
 
     }
-
+    //metodo para setar um quadradinho preto
     public void squareBlack(ImageView v){
 
         v.setImageResource(R.drawable.square_black);
 
     }
+    //metodo que checa a posição da cabeça
+     private void checkposicao(int x, int y) {
+         if(x >= n){
+             snake.get(0)[0] = 0;
+         }
+         if(y >= n){
+             snake.get(0)[1] = 0;
+         }
+         if(x == -1){
+             snake.get(0)[0] = n-1;
+         }
+         if(y == -1){
+             snake.get(0)[1] = n-1;
+         }
+     }
+    //cabeça da cobra
+    public void head(){
+
+        x = snake.get(0)[0];
+        y = snake.get(0)[1];
+        x += orientation[0];
+        y += orientation[1];
+
+        snake.get(0)[0] = x;
+        snake.get(0)[1] = y;
+
+        checkposicao(x, y);
+
+    }
+    //cria a cobra
     public void createSnake(){
+
         squareRed(table[n /2][n /2]);
+        //cria uma orientação para direita
         orientation[0] = 0;
         orientation[1] = 1;
+        //variavel para definir a posição
         int position[] = new int[2];
         position[0] = n/2;
         position[1] = n/2;
+        //add a posição na cobra
         snake.add(position);
+        //move ela
         move(orientation);
+
     }
-    /*private int[] checkposicao(int[] posicao) {
-
-        return posicao;
-    }*/
-    public void head(){
-
-        position = snake.get(0);
-        position[0] += orientation[0];
-        position[1] += orientation[1];
-
-//        position = checkposicao(position);
-        if(position[0] == n-1){
-            position[0] = 0;
-        }
-        if(position[1] == n-1){
-            position[1] = 0;
-        }
-        if(position[0] == -1){
-            position[0] = n-1;
-        }
-        if(position[1] == -1){
-            position[1] = n-1;
-        }
-        snake.get(0)[0] = position[0];
-        snake.get(0)[1] = position[1];
-    }
-
+    //thread para mover a cobra
     public void move(final int[] orient){
+        //precisa do handler para setar os ui
         final android.os.Handler handler = new android.os.Handler();
 
 
-
+        //cria uma thread
         new Thread(new Runnable() {
             @Override
             public void run() {
+                //thread roda enquanto a variavel for verdadeira
                 while(running){
                     try {
-                        Thread.sleep(dificult);
+                        Thread.sleep(dificult);//tempo que a thread "dorme', aqui é setado a dificuldade
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -163,16 +175,20 @@ public class Jogo extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+                        //for que percorre a cobra
                         for (int i = 0; i < snake.size(); i++) {
                             int [] position = snake.get(i);
 
+                            //limpa a posição que a cobra passou
                             squareBlack(table[position[0]][position[1]]);
 
 
                         }
+                        //cabeça da cobra
                         head();
                         for (int i = 0; i < snake.size(); i++){
                             int [] position = snake.get(i);
+
                             squareRed(table[position[0]][position[1]]);
                         }
 
