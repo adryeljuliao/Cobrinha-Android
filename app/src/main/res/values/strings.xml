@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="bot_iniciar">Iniciar</string>
+    <string name="bot_config">Configurações</string>
+    <string name="bot_continuar">Continuar</string>
+    <string name="bot_sair">Sair</string>
+    <string name="bot_confirmar_dificuldade">Confirmar</string>
+
+    <string name="Text_seleciona_dificuldade">Selecione o nível de dificuldade</string>
+    <string name="Text_seleciona_tamanho">Selecione o tamanho do tabuleiro</string>
+    <string name="Text_radio_dificil">Difícil</string>
+    <string name="Text_radio_medio">Médio</string>
+    <string name="Text_radio_facil">Fácil</string>
+    <string name="Text_pontuacao">PONTOS</string>
 </resources>

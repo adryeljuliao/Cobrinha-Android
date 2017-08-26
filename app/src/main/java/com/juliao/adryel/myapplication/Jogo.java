@@ -1,5 +1,6 @@
 package com.juliao.adryel.myapplication;
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +14,10 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 public class Jogo extends AppCompatActivity {
+    private static final String PREF_SNAKE = "prefs";
     MediaPlayer mp;//musica do app
-    int tam;//tamanho do tabuleiro
-    int dificult = 200;//nivel de dificuldade
+    int n;//tamanho do tabuleiro
+    int dificult;//nivel de dificuldade
     GridLayout grid;//tabuleiro grid para inflar
     ImageView[][] table;//tabuleiro auxiliar
     ArrayList<int []> snake = new ArrayList<>();//cobra, arrayList de vetor
@@ -48,38 +50,24 @@ public class Jogo extends AppCompatActivity {
         if(recuperaDados == null){//verifica se o bundle é vazio, se for inicia com um valor padrão e dificuldade padrao
 
             Log.i("ENTRA", "entrou no if");
-            tam = 30;
-            grid.setColumnCount(tam);
-            grid.setRowCount(tam);
-            table = new ImageView[tam][tam];
+            n = 30;
+            dificult = 300;
+            grid.setColumnCount(n);
+            grid.setRowCount(n);
+            table = new ImageView[n][n];
             //for para inflar um layout, ou seja, o gridLayout
-            for(int i = 0; i < tam; i++){
-                for(int j = 0; j < tam; j++){
+            inflatGrid(n);
 
-                    LayoutInflater inflar = LayoutInflater.from(this);//obj que serve para inflar, pegando como parametro o contexto
-                    ImageView imageSquares = (ImageView) inflar.inflate(R.layout.square, grid, false);//infla o layout
-                    table[i][j] = imageSquares;
-                    grid.addView(imageSquares);
-
-                }
-            }
 
         }else{
             Log.i("ENTRA", "entrou no ELSE");
             int n = recuperaDados.getInt("tamanho");
+            dificult = recuperaDados.getInt("dificuldade");
             grid.setColumnCount(n);
             grid.setRowCount(n);
             table = new ImageView[n][n];
-            for(int i = 0; i < n; i++){
-                for(int j = 0; j < n; j++){
+            inflatGrid(n);
 
-                    LayoutInflater inflar = LayoutInflater.from(this);
-                    ImageView imageSquares = (ImageView) inflar.inflate(R.layout.square, grid, false);
-                    table[i][j] = imageSquares;
-                    grid.addView(imageSquares);
-
-                }
-            }
         }
         mp = MediaPlayer.create(this, R.raw.spi);
         mp.setLooping(true);
@@ -87,34 +75,72 @@ public class Jogo extends AppCompatActivity {
 
 
 
-    createSnake();
+  createSnake();
+
+    }
+
+    public void inflatGrid(int n){
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+
+                LayoutInflater inflar = LayoutInflater.from(this);
+                ImageView imageSquares = (ImageView) inflar.inflate(R.layout.square, grid, false);
+                table[i][j] = imageSquares;
+                grid.addView(imageSquares);
+
+
+            }
+        }
+    }
+
+    public void checkPosition(int[] pos){
 
     }
 
     public void squareRed(ImageView v){
 
         v.setImageResource(R.drawable.red_square);
+
     }
 
     public void squareBlack(ImageView v){
+
         v.setImageResource(R.drawable.square_black);
+
     }
     public void createSnake(){
-        squareRed(table[tam /2][tam /2]);
+        squareRed(table[n /2][n /2]);
         orientation[0] = 0;
         orientation[1] = 1;
         int position[] = new int[2];
-        position[0] = tam /2;
-        position[1] = tam /2;
+        position[0] = n/2;
+        position[1] = n/2;
         snake.add(position);
         move(orientation);
     }
+    /*private int[] checkposicao(int[] posicao) {
+
+        return posicao;
+    }*/
     public void head(){
+
         position = snake.get(0);
         position[0] += orientation[0];
         position[1] += orientation[1];
 
-
+//        position = checkposicao(position);
+        if(position[0] == n-1){
+            position[0] = 0;
+        }
+        if(position[1] == n-1){
+            position[1] = 0;
+        }
+        if(position[0] == -1){
+            position[0] = n-1;
+        }
+        if(position[1] == -1){
+            position[1] = n-1;
+        }
         snake.get(0)[0] = position[0];
         snake.get(0)[1] = position[1];
     }
@@ -213,5 +239,13 @@ public class Jogo extends AppCompatActivity {
         super.onDestroy();
         mp.stop();
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences settings = getSharedPreferences(PREF_SNAKE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        //editor.putInt("", table[position[0]][position[1]]);
     }
 }
