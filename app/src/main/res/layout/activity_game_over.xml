@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context="com.juliao.adryel.myapplication.GameOver"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Novo jogo"
+        android:onClick="newGame"
+        android:id="@+id/novo"
+        android:background="@drawable/bot_user_main"
+        tools:layout_editor_absoluteY="258dp"
+        tools:layout_editor_absoluteX="16dp" />
+    <Button
+        android:onClick="back"
+        android:background="@drawable/bot_user_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        android:id="@+id/Voltar"
+        tools:layout_editor_absoluteY="258dp"
+        tools:layout_editor_absoluteX="218dp" />
+
+    <LinearLayout
+        android:background="#000"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:layout_editor_absoluteY="145dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <TextView
+            android:textColor="#FFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pontuação: "
+            android:textSize="25dp"/>
+
+        <TextView
+            android:textColor="#FFF"
+            android:textSize="25dp"
+            android:id="@+id/idRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

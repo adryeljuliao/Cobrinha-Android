@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">PduCobra</string>
     <string name="bot_iniciar">Iniciar</string>
     <string name="bot_config">Configurações</string>
     <string name="bot_continuar">Continuar</string>
     <string name="bot_sair">Sair</string>
-    <string name="bot_confirmar_dificuldade">Confirmar</string>
+    <string name="bot_confirmar_dificuldade">Salvar</string>
 
     <string name="Text_seleciona_dificuldade">Selecione o nível de dificuldade</string>
     <string name="Text_seleciona_tamanho">Selecione o tamanho do tabuleiro</string>

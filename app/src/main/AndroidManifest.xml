@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Jogo" />
-        <activity android:name=".Config"></activity>
+        <activity android:name=".Config" />
+        <activity android:name=".GameOver"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="Text_pontuacao">SCORE</string>
+    <string name="Text_radio_dificil">Hard</string>
+    <string name="Text_radio_facil">Easy</string>
+    <string name="Text_radio_medio">Medium</string>
+    <string name="Text_seleciona_dificuldade">Select nível</string>
+    <string name="Text_seleciona_tamanho">Select size</string>
+    <string name="bot_config">settings</string>
+    <string name="bot_confirmar_dificuldade">Save</string>
+    <string name="bot_continuar">Continue</string>
+    <string name="bot_iniciar">Start</string>
+    <string name="bot_sair">Exit</string>
+</resources>
